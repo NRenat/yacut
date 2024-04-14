@@ -1,37 +1,29 @@
-Клонировать репозиторий и перейти в него в командной строке:
+# YACUT - сервис сокращения ссылок
 
-```
-git clone 
-```
+Пользователи могут воспользоваться веб версией или использовать API. 
 
-```
-cd yacut
-```
+Документация к API хранится в [openapi.yml](openapi.yml).
 
-Cоздать и активировать виртуальное окружение:
+# Запуск
 
-```
-python3 -m venv venv
-```
-
-* Если у вас Linux/macOS
-
-    ```
-    source venv/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source venv/scripts/activate
-    ```
-
-Установить зависимости из файла requirements.txt:
-
-```
-python3 -m pip install --upgrade pip
-```
-
-```
+* Установить зависимости 
+```bash
 pip install -r requirements.txt
+```
+
+* Инициализировать БД
+
+```bash
+flask db init
+```
+
+* Применить миграции 
+
+```bash
+flask db migrate -m "Initial migration"
+flask db upgrade
+```
+* Запуск приложения
+```bash
+flask run 
 ```
