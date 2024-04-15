@@ -1,1 +1,7 @@
-Single-database configuration for Flask.
+Инициализировать БД - flask db init
+
+Создать миграции - flask db migrate -m "Comment"
+
+Применить миграции - flask db upgrade
+
+Запуск приложения - flask run

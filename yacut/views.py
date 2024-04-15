@@ -5,7 +5,7 @@ from flask import abort, flash, redirect, render_template
 from . import app, db
 from .forms import URLForm
 from .models import URLMap
-from .utils import get_random_string
+from .utils import get_random_url
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -19,7 +19,7 @@ def get_unique_short_id():
 
         url = URLMap(
             original=form.original_link.data,
-            short=short if short else get_random_string(),
+            short=short if short else get_random_url(),
         )
         db.session.add(url)
         db.session.commit()

@@ -1,11 +1,13 @@
 from http import HTTPStatus
 
 from flask import jsonify, request
+
 from . import db, app
-from .constants import MAX_LENGTH
+from .constants import MAX_SHORT_LENGTH
 from .error_handlers import InvalidAPIUsage
+from .forms import URLForm
 from .models import URLMap
-from .utils import get_random_string, is_valid_custom_id
+from .utils import get_random_url
 
 
 @app.route('/api/id/', methods=('POST',))
@@ -20,14 +22,15 @@ def get_unique_short_id_api():
 
     if data.get('custom_id'):
 
-        if len(data.get('custom_id')) > MAX_LENGTH or not is_valid_custom_id(
-                data.get('custom_id')):
+        if (len(
+                data.get('custom_id')) > MAX_SHORT_LENGTH or
+                not URLForm.is_valid_custom_id(data.get('custom_id'))):
             raise InvalidAPIUsage(
                 'Указано недопустимое имя для короткой ссылки',
                 HTTPStatus.BAD_REQUEST)
 
     else:
-        data['custom_id'] = get_random_string()
+        data['custom_id'] = get_random_url()
 
     if URLMap.is_short_exists(data.get('custom_id')):
         raise InvalidAPIUsage(
