@@ -35,6 +35,7 @@ flask run
 ```
 
 ## Технологии
+* Python 3.9
 * Flask
 * SQLAlchemy
 * SQLite
